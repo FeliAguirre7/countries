@@ -1,4 +1,5 @@
 const { Country, Activity } = require("../db");
+const { Op } = require("sequelize");
 
 const getAllCountries = async () => {
   const allCountries = await Country.findAll();
@@ -8,7 +9,9 @@ const getAllCountries = async () => {
 const searchCountryByName = async (name) => {
   const countryName = await Country.findAll({
     where: {
-      name: name,
+      name: {
+        [Op.iLike]: `%${name}%`,
+      },
     },
   });
   return countryName;
