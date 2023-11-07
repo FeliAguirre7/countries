@@ -14,8 +14,14 @@ getAllActHandler = async (req, res) => {
 
 postActHandler = async (req, res) => {
   try {
-    const { id, name, difficulty, season } = req.body;
-    const newAct = await createActivity(id, name, difficulty, season);
+    const { id, name, difficulty, season, countryId } = req.body;
+    const newAct = await createActivity(
+      id,
+      name,
+      difficulty,
+      season,
+      countryId
+    );
     res.status(OK).json(newAct);
   } catch (error) {
     res.status(ERROR).json({ error: error.message });

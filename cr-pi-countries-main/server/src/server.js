@@ -2,7 +2,7 @@ const express = require("express");
 const router = require("./routes");
 const morgan = require("morgan");
 const cors = require("cors");
-const { getAllCountriesApiToDb } = require("./controllers/countryControllers");
+const { saveCountriesApiToDb } = require("./controllers/saveCountriesDb");
 
 const server = express();
 
@@ -12,6 +12,6 @@ server.use(cors());
 
 server.use(router);
 
-getAllCountriesApiToDb();
+// saveCountriesApiToDb();
 
 module.exports = server;
