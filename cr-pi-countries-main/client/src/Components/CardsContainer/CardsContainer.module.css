@@ -1,0 +1,9 @@
+.cardCont {
+  display: flex;
+  padding: 5%;
+  border: 1px solid black;
+  flex-direction: row;
+  border-radius: 5px;
+  flex-wrap: wrap;
+  gap: 3em;
+}

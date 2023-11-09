@@ -1,0 +1,6 @@
+.mainNav {
+  display: flex;
+  justify-content: space-evenly;
+  border-radius: 15px;
+  border: 1px solid black;
+}

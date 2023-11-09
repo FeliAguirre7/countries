@@ -1,0 +1,12 @@
+.mainCard {
+  border: 1px solid black;
+  width: fit-content;
+  height: fit-content;
+}
+
+.flag {
+  min-height: 100px;
+  max-height: 400px;
+  min-width: 300px;
+  max-width: 50px;
+}
