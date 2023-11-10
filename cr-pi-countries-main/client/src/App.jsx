@@ -8,7 +8,7 @@ function App() {
     <div>
       {location.pathname !== "/" && <NavBar />}
       <Route exact path="/home" render={() => <Home />} />
-      <Route exact path="/detail" render={() => Detail} />
+      <Route exact path="/detail/:id" render={() => <Detail />} />
       <Route exact path="/create" render={() => <Form />} />
       <Route exact path="/" render={() => <Landing />} />
     </div>
