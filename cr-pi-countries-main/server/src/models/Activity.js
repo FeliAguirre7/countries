@@ -34,5 +34,13 @@ module.exports = (sequelize) => {
         },
       },
     },
+
+    duration: {
+      type: DataTypes.INTEGER,
+      validate: {
+        isInt: true,
+        min: 1,
+      },
+    },
   });
 };
