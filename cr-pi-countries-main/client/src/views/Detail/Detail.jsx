@@ -15,8 +15,14 @@ const Detail = () => {
   return (
     <>
       <h1>Detail</h1>
-      <p>Id: {detailById.id}</p>
-      <p>Name: {detailById.name}</p>
+      <h1>Id: {detailById.id}</h1>
+      <h1>Name: {detailById.name}</h1>
+      <h1>Continent: {detailById.continent}</h1>
+      <h1>Capital: {detailById.capital}</h1>
+      <h1>Subregion: {detailById.subregion}</h1>
+      <h1>Population: {detailById.population}</h1>
+      <h1>Name: {detailById.name}</h1>
+      <img src={detailById.image} alt={`${detailById.name} flag`} />
     </>
   );
 };

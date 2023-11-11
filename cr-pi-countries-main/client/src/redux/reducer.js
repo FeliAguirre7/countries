@@ -1,8 +1,22 @@
-import { GET_BY_ID, GET_COUNTRIES, SEARCH_BY_NAME } from "./actionTypes";
+import {
+  GET_BY_ID,
+  GET_COUNTRIES,
+  SEARCH_BY_NAME,
+  FILTER_CONTINENT,
+  FILTER_ACTIVITY,
+  RESET_FILTERS,
+  PREV,
+  NEXT,
+} from "./actionTypes";
 
 const initialState = {
   countries: [],
   detailById: [],
+  appliedFilters: {
+    continent: [],
+    activity: [],
+  },
+  pageNumber: 1,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -13,6 +27,37 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, countries: action.payload };
     case GET_BY_ID:
       return { ...state, detailById: action.payload };
+    case FILTER_CONTINENT:
+      return {
+        ...state,
+        appliedFilters: {
+          ...state.appliedFilters,
+          continent: action.payload,
+        },
+      };
+    case FILTER_ACTIVITY:
+      return {
+        ...state,
+        appliedFilters: { ...state.appliedFilters, activity: action.payload },
+      };
+    case RESET_FILTERS:
+      return {
+        ...state,
+        appliedFilters: {
+          continent: [],
+          activity: [],
+        },
+      };
+    case NEXT:
+      return {
+        ...state,
+        pageNumber: state.pageNumber + 1,
+      };
+    case PREV:
+      return {
+        ...state,
+        pageNumber: state.pageNumber - 1,
+      };
     default:
       return { ...state };
   }
