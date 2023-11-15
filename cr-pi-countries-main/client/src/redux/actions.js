@@ -8,6 +8,7 @@ import {
   RESET_FILTERS,
   NEXT,
   PREV,
+  CREATE_ACT,
 } from "./actionTypes";
 
 export const getCountries = () => {
@@ -65,5 +66,22 @@ export const next = () => {
 export const prev = () => {
   return {
     type: PREV,
+  };
+};
+
+export const createAct = (activity) => {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3001/activities",
+        activity
+      );
+      return dispatch({
+        type: CREATE_ACT,
+        payload: data,
+      });
+    } catch (error) {
+      alert(`lo sentimos, la actividad ya se encuentra en la db`);
+    }
   };
 };

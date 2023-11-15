@@ -1,6 +1,5 @@
 import CardsContainer from "../../Components/CardsContainer/CardsContainer";
 import SearchBar from "../../Components/SearchBar/searchBar";
-import Filter from "../../Components/Filter/filter";
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";

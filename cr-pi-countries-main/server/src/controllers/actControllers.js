@@ -16,6 +16,8 @@ const createActivity = async (
     duration,
   });
 
+  await newActivity.setCountries([]);
+
   const country = await Country.findByPk(countryId);
 
   if (country) {

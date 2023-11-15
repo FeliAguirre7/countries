@@ -34,11 +34,7 @@ export default function Filter() {
     <>
       <div>
         <label htmlFor="continentFilter">Filter by continent: </label>
-        <select
-          id="continentFilter"
-          onChange={handleContinentChange}
-          value={selectedContinent}
-        >
+        <select id="continentFilter" onChange={handleContinentChange}>
           <option value="All">All</option>
           <option value="Africa">Africa</option>
           <option value="Americas">Americas</option>

@@ -5,9 +5,11 @@ import Paginated from "../../Components/Paginated/Paginated";
 import Filter from "../../Components/Filter/filter";
 
 const CardsContainer = () => {
-  const { countries, pageNumber } = useSelector((state) => state);
+  const countries = useSelector((state) => state.countries);
 
-  const countriesPerPage = 8;
+  const pageNumber = useSelector((state) => state.pageNumber);
+
+  const countriesPerPage = 10;
 
   let from = (pageNumber - 1) * countriesPerPage;
   let until = pageNumber * countriesPerPage;
@@ -27,6 +29,7 @@ const CardsContainer = () => {
               flag={country.image}
               name={country.name}
               continent={country.continent}
+              Activities={country.Activities}
             ></Card>
           );
         })}

@@ -7,10 +7,13 @@ import {
   RESET_FILTERS,
   PREV,
   NEXT,
+  CREATE_ACT,
 } from "./actionTypes";
 
 const initialState = {
   countries: [],
+  allCountries: [],
+  activities: [],
   detailById: [],
   appliedFilters: {
     continent: [],
@@ -30,10 +33,17 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_CONTINENT:
       return {
         ...state,
+        countries:
+          action.payload === "All"
+            ? [...state.countries]
+            : state.countries.filter(
+                (country) => country.continent === action.payload
+              ),
         appliedFilters: {
           ...state.appliedFilters,
           continent: action.payload,
         },
+        pageNumber: 1,
       };
     case FILTER_ACTIVITY:
       return {
@@ -57,6 +67,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pageNumber: state.pageNumber - 1,
+      };
+    case CREATE_ACT:
+      return {
+        ...state,
+        activities: [...state.activities, action.payload],
       };
     default:
       return { ...state };

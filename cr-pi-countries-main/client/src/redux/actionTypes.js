@@ -6,3 +6,4 @@ export const FILTER_ACTIVITY = "FILTER_ACTIVITY";
 export const RESET_FILTERS = "RESET_FILTERS";
 export const NEXT = "NEXT";
 export const PREV = "PREV";
+export const CREATE_ACT = "CREATE_ACT";
