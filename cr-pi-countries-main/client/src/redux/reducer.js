@@ -12,7 +12,8 @@ import {
 
 const initialState = {
   countries: [],
-  allCountries: [],
+  filterContinent: [],
+  filterActivity: [],
   activities: [],
   detailById: [],
   appliedFilters: {
@@ -25,7 +26,12 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_COUNTRIES:
-      return { ...state, countries: action.payload };
+      return {
+        ...state,
+        countries: action.payload,
+        filterContinent: action.payload,
+        filterActivity: action.payload,
+      };
     case SEARCH_BY_NAME:
       return { ...state, countries: action.payload };
     case GET_BY_ID:
@@ -35,8 +41,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         countries:
           action.payload === "All"
-            ? [...state.countries]
-            : state.countries.filter(
+            ? [...state.filterContinent]
+            : state.filterContinent.filter(
                 (country) => country.continent === action.payload
               ),
         appliedFilters: {
@@ -48,7 +54,19 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_ACTIVITY:
       return {
         ...state,
-        appliedFilters: { ...state.appliedFilters, activity: action.payload },
+        countries:
+          action.payload === "All"
+            ? [...state.filterActivity]
+            : state.filterActivity.filter((country) =>
+                country.Activities.some(
+                  (activity) => activity.name === action.payload
+                )
+              ),
+        appliedFilters: {
+          ...state.appliedFilters,
+          activity: action.payload,
+        },
+        pageNumber: 1,
       };
     case RESET_FILTERS:
       return {

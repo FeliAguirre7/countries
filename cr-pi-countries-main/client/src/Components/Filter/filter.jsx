@@ -9,9 +9,6 @@ import {
 export default function Filter() {
   const dispatch = useDispatch();
 
-  const [selectedContinent, setSelectedContinent] = useState("All");
-  const [selectedActivity, setSelectedActivity] = useState("All");
-
   const handleContinentChange = (event) => {
     const continent = event.target.value;
     dispatch(filterContinent(continent));
@@ -21,13 +18,6 @@ export default function Filter() {
   const handleActivityChange = (event) => {
     const activity = event.target.value;
     dispatch(filterByActivity(activity));
-  };
-
-  const handleResetFilters = () => {
-    setSelectedContinent("All");
-    setSelectedActivity("All");
-    dispatch(resetFilters());
-    console.log(resetFilters());
   };
 
   return (
@@ -44,18 +34,13 @@ export default function Filter() {
         </select>
 
         <label htmlFor="activityFilter">Filter by activity: </label>
-        <select
-          id="activityFilter"
-          onChange={handleActivityChange}
-          value={selectedActivity}
-        >
+        <select id="activityFilter" onChange={handleActivityChange}>
           <option value="All">All</option>
           <option value="Diving">Diving</option>
-          <option value="Safari">Safari</option>
-          <option value="Kayak">Kayak</option>
+          <option value="Senderism">Senderism</option>
+          <option value="Kayaking">Kayaking</option>
+          <option value="Skiing">Skiing</option>
         </select>
-
-        <button onClick={handleResetFilters}>Reset filters</button>
       </div>
     </>
   );
