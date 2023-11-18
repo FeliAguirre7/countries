@@ -20,7 +20,6 @@ const Card = (props) => {
       activitiesSection = <p>No activities</p>;
     }
   }
-  console.log(props);
 
   return (
     <Link to={`/detail/${props.id}`}>

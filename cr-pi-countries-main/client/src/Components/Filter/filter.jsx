@@ -1,10 +1,6 @@
 import { useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
-import {
-  filterByActivity,
-  filterContinent,
-  resetFilters,
-} from "../../redux/actions";
+
+import { filterByActivity, filterContinent } from "../../redux/actions";
 
 export default function Filter() {
   const dispatch = useDispatch();

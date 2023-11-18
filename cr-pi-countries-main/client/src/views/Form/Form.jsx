@@ -14,22 +14,42 @@ const Form = () => {
     difficulty: "",
     duration: "",
     season: "",
-    countryId: "",
+    countryId: [],
   });
+
+  const [selectedCountries, setSelectedCountries] = useState([]);
 
   const [errors, setErrors] = useState({
     name: "",
     difficulty: "",
     duration: "",
     season: "",
-    countryId: "",
+    countryId: [],
   });
 
   const handleChange = (event) => {
-    setForm({
-      ...form,
-      [event.target.name]: event.target.value,
-    });
+    const { options, name, value } = event.target;
+
+    if (name === "countryId") {
+      const selectedCountries = Array.from(options)
+        .filter((option) => option.selected)
+        .map((option) => option.value);
+
+      setForm((prevForm) => ({
+        ...prevForm,
+        countryId: selectedCountries.map((country) => country.id),
+      }));
+
+      setSelectedCountries((prevSelected) => [
+        ...prevSelected,
+        ...selectedCountries,
+      ]);
+    } else {
+      setForm((prevForm) => ({
+        ...prevForm,
+        [name]: value,
+      }));
+    }
   };
 
   const resetForm = () => {
@@ -38,17 +58,18 @@ const Form = () => {
       difficulty: "",
       duration: "",
       season: "",
-      countryId: "",
+      countryId: [],
     });
+    setSelectedCountries([]);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!form.countryId) {
+    if (form.countryId.length === 0) {
       setErrors({
         ...errors,
-        countryId: "please select a country",
+        countryId: "please select at least one country",
       });
       return;
     }
@@ -113,7 +134,7 @@ const Form = () => {
 
         <div>
           <label>Country: </label>
-          <select name="countryId" onChange={handleChange}>
+          <select name="countryId" onChange={handleChange} multiple>
             {countries.map((country) => {
               return (
                 <option key={country.id} value={country.id}>
@@ -122,7 +143,14 @@ const Form = () => {
               );
             })}
           </select>
-          <span style={{ color: "red" }}>{errors.country}</span>
+          <ul>
+            {selectedCountries.map((countryId) => (
+              <li key={countryId}>
+                {countries.find((country) => country.id === countryId).name}
+              </li>
+            ))}
+          </ul>
+          <span style={{ color: "red" }}>{errors.countryId}</span>
         </div>
 
         <button type="submit">Create</button>
