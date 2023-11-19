@@ -17,8 +17,8 @@ const initialState = {
   activities: [],
   detailById: [],
   appliedFilters: {
-    continent: [],
-    activity: [],
+    continent: "All",
+    activity: "All",
   },
   pageNumber: 1,
   noMatchesContinent: false,
@@ -48,6 +48,7 @@ const rootReducer = (state = initialState, action) => {
         filteredByContinent = state.filterContinent.filter(
           (country) => country.continent === action.payload
         );
+        console.log(filteredByContinent);
       }
       if (state.appliedFilters.activity === "All") {
         finalFilterContinent = filteredByContinent;
