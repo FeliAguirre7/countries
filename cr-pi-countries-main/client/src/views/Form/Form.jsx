@@ -27,8 +27,17 @@ const Form = () => {
     countryId: [],
   });
 
+  const submitDisable =
+    Object.values(form).some((value) => !value) || form.countryId.length === 0;
+
   const handleChange = (event) => {
     const { options, name, value } = event.target;
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+      countryId: "",
+    }));
 
     if (name === "countryId") {
       const selectedCountries = Array.from(options)
@@ -37,19 +46,28 @@ const Form = () => {
 
       setForm((prevForm) => ({
         ...prevForm,
-        countryId: selectedCountries.map((country) => country.id),
+        countryId: Array.from(
+          new Set([...prevForm.countryId, ...selectedCountries])
+        ),
       }));
-
-      setSelectedCountries((prevSelected) => [
-        ...prevSelected,
-        ...selectedCountries,
-      ]);
     } else {
       setForm((prevForm) => ({
         ...prevForm,
         [name]: value,
       }));
     }
+  };
+
+  const handleRemoveCountry = (removedCountry) => {
+    setForm((prevForm) => ({
+      ...prevForm,
+      countryId: prevForm.countryId.filter((id) => id !== removedCountry),
+    }));
+
+    setSelectedCountries(
+      (prevSelected) =>
+        new Set([...prevSelected].filter((id) => id !== removedCountry))
+    );
   };
 
   const resetForm = () => {
@@ -89,13 +107,22 @@ const Form = () => {
       <h1>Create a tourist activity!</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Name: </label>
-          <input
+          <label htmlFor="name">Activity: </label>
+          <select
+            id="name"
             name="name"
-            type="text"
             value={form.name}
             onChange={handleChange}
-          ></input>
+          >
+            <option value="" disabled selected>
+              Select
+            </option>
+            <option value="Diving">Diving</option>
+            <option value="Senderism">Senderism</option>
+            <option value="Kayaking">Kayaking</option>
+            <option value="Skiing">Skiing</option>
+            <option value="Cultural visits">Cultural visits</option>
+          </select>
         </div>
 
         <div>
@@ -124,16 +151,24 @@ const Form = () => {
 
         <div>
           <label>Season: </label>
-          <input
-            type="text"
+          <select
+            id="season"
             name="season"
             value={form.season}
             onChange={handleChange}
-          ></input>
+          >
+            <option value="" disabled selected>
+              Select
+            </option>
+            <option value="Winter">Winter</option>
+            <option value="Spring">Spring</option>
+            <option value="Summer">Summer</option>
+            <option value="Autumn">Autumn</option>
+          </select>
         </div>
 
         <div>
-          <label>Country: </label>
+          <label>Countries: </label>
           <select name="countryId" onChange={handleChange} multiple>
             {countries.map((country) => {
               return (
@@ -144,16 +179,24 @@ const Form = () => {
             })}
           </select>
           <ul>
-            {selectedCountries.map((countryId) => (
+            {form.countryId.map((countryId) => (
               <li key={countryId}>
                 {countries.find((country) => country.id === countryId).name}
+                <button
+                  type="button"
+                  onClick={() => handleRemoveCountry(countryId)}
+                >
+                  Remove
+                </button>
               </li>
             ))}
           </ul>
           <span style={{ color: "red" }}>{errors.countryId}</span>
         </div>
 
-        <button type="submit">Create</button>
+        <button type="submit" disabled={submitDisable}>
+          Create
+        </button>
       </form>
     </>
   );

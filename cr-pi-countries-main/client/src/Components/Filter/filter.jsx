@@ -27,6 +27,7 @@ export default function Filter() {
           <option value="Antarctic">Antarctic</option>
           <option value="Europe">Europe</option>
           <option value="Oceania">Oceania</option>
+          <option value="Asia">Asia</option>
         </select>
 
         <label htmlFor="activityFilter">Filter by activity: </label>
@@ -36,6 +37,7 @@ export default function Filter() {
           <option value="Senderism">Senderism</option>
           <option value="Kayaking">Kayaking</option>
           <option value="Skiing">Skiing</option>
+          <option value="Cultural visits">Cultural visits</option>
         </select>
       </div>
     </>

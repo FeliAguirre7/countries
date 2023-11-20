@@ -6,7 +6,7 @@ const createActivity = async (
   difficulty,
   season,
   duration,
-  countryIds
+  countryId
 ) => {
   const newActivity = await Activity.create({
     id,
@@ -18,10 +18,10 @@ const createActivity = async (
 
   await newActivity.setCountries([]);
 
-  if (countryIds && countryIds.length > 0) {
+  if (countryId && countryId.length > 0) {
     const countries = await Country.findAll({
       where: {
-        id: countryIds,
+        id: countryId,
       },
     });
     if (countries && countries.length > 0) {
