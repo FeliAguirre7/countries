@@ -7,7 +7,7 @@ const Form = () => {
   // const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const countries = useSelector((state) => state.countries);
+  const originalCountries = useSelector((state) => state.originalCountries);
 
   const [form, setForm] = useState({
     name: "",
@@ -81,6 +81,13 @@ const Form = () => {
     setSelectedCountries([]);
   };
 
+  const isActivityAlreadyExists = (countryId, activityName) => {
+    const countryActivities =
+      originalCountries.find((country) => country.id === countryId)
+        ?.Activities || [];
+    return countryActivities.some((activity) => activity.name === activityName);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -88,6 +95,21 @@ const Form = () => {
       setErrors({
         ...errors,
         countryId: "please select at least one country",
+      });
+      return;
+    }
+
+    const { countryId, name } = form;
+
+    const isActivityAlreadyInSelectedCountries = countryId.some((id) =>
+      isActivityAlreadyExists(id, name)
+    );
+
+    if (isActivityAlreadyInSelectedCountries) {
+      setErrors({
+        ...errors,
+        countryId:
+          "This activity already exists in one of the selected countries",
       });
       return;
     }
@@ -114,7 +136,7 @@ const Form = () => {
             value={form.name}
             onChange={handleChange}
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select
             </option>
             <option value="Diving">Diving</option>
@@ -157,7 +179,7 @@ const Form = () => {
             value={form.season}
             onChange={handleChange}
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select
             </option>
             <option value="Winter">Winter</option>
@@ -170,7 +192,7 @@ const Form = () => {
         <div>
           <label>Countries: </label>
           <select name="countryId" onChange={handleChange} multiple>
-            {countries.map((country) => {
+            {originalCountries.map((country) => {
               return (
                 <option key={country.id} value={country.id}>
                   {country.name}
@@ -181,12 +203,15 @@ const Form = () => {
           <ul>
             {form.countryId.map((countryId) => (
               <li key={countryId}>
-                {countries.find((country) => country.id === countryId).name}
+                {
+                  originalCountries.find((country) => country.id === countryId)
+                    .name
+                }
                 <button
                   type="button"
                   onClick={() => handleRemoveCountry(countryId)}
                 >
-                  Remove
+                  X
                 </button>
               </li>
             ))}

@@ -9,6 +9,9 @@ import {
   NEXT,
   PREV,
   CREATE_ACT,
+  SET_SORT,
+  APPLY_SORT,
+  RESTORE_STATE,
 } from "./actionTypes";
 
 export const getCountries = () => {
@@ -18,6 +21,11 @@ export const getCountries = () => {
     dispatch({ type: GET_COUNTRIES, payload: countries });
   };
 };
+
+export const restoreState = (storedState) => ({
+  type: RESTORE_STATE,
+  payload: storedState,
+});
 
 export const searchByName = (name) => {
   return async (dispatch) => {
@@ -48,6 +56,19 @@ export const filterByActivity = (activity) => {
   return {
     type: FILTER_ACTIVITY,
     payload: activity,
+  };
+};
+
+export const setSort = (sortBy, sortOrder) => {
+  return {
+    type: SET_SORT,
+    payload: { sortBy, sortOrder },
+  };
+};
+
+export const applySort = () => {
+  return {
+    type: APPLY_SORT,
   };
 };
 

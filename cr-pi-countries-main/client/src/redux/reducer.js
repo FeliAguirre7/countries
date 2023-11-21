@@ -8,6 +8,9 @@ import {
   PREV,
   NEXT,
   CREATE_ACT,
+  SET_SORT,
+  APPLY_SORT,
+  RESTORE_STATE,
 } from "./actionTypes";
 
 const initialState = {
@@ -23,6 +26,8 @@ const initialState = {
   pageNumber: 1,
   noMatchesContinent: false,
   noMatchesActivity: false,
+  sortBy: "name",
+  sortOrder: "asc",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -33,6 +38,7 @@ const rootReducer = (state = initialState, action) => {
         countries: action.payload,
         filterContinent: action.payload,
         filterActivity: action.payload,
+        originalCountries: action.payload,
       };
     case SEARCH_BY_NAME:
       return { ...state, countries: action.payload };
@@ -48,7 +54,6 @@ const rootReducer = (state = initialState, action) => {
         filteredByContinent = state.filterContinent.filter(
           (country) => country.continent === action.payload
         );
-        console.log(filteredByContinent);
       }
       if (state.appliedFilters.activity === "All") {
         finalFilterContinent = filteredByContinent;
@@ -107,6 +112,36 @@ const rootReducer = (state = initialState, action) => {
         pageNumber: 1,
         noMatchesActivity,
       };
+
+    case SET_SORT:
+      return {
+        ...state,
+        sortBy: action.payload.sortBy,
+        sortOrder: action.payload.sortOrder,
+      };
+
+    case APPLY_SORT:
+      const sortedCountries = state.countries.slice().sort((a, b) => {
+        const keyA = a[state.sortBy];
+        const keyB = b[state.sortBy];
+
+        if (keyA < keyB) return state.sortOrder === "asc" ? -1 : 1;
+        if (keyA > keyB) return state.sortOrder === "asc" ? 1 : -1;
+
+        return 0;
+      });
+
+      return {
+        ...state,
+        countries: sortedCountries,
+      };
+
+    case RESTORE_STATE:
+      return {
+        ...state,
+        ...action.payload,
+      };
+
     case RESET_FILTERS:
       return {
         ...state,

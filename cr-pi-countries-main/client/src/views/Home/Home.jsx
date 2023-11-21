@@ -1,5 +1,6 @@
 import CardsContainer from "../../Components/CardsContainer/CardsContainer";
 import SearchBar from "../../Components/SearchBar/searchBar";
+import "./Home.css";
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -15,7 +16,7 @@ const Home = () => {
 
   return (
     <>
-      <div>
+      <div className="Home">
         <h1>Countries</h1>
         <h1>
           <SearchBar />

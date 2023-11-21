@@ -31,6 +31,7 @@ const Card = (props) => {
         />
         <p>Name: {props.name}</p>
         <p>Continent: {props.continent}</p>
+        <p>Population: {props.population}</p>
         {activitiesSection}
       </div>
     </Link>

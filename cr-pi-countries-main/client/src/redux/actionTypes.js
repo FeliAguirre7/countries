@@ -7,3 +7,6 @@ export const RESET_FILTERS = "RESET_FILTERS";
 export const NEXT = "NEXT";
 export const PREV = "PREV";
 export const CREATE_ACT = "CREATE_ACT";
+export const SET_SORT = "SET_SORT";
+export const APPLY_SORT = "APPLY_SORT";
+export const RESTORE_STATE = "RESTORE_STATE";

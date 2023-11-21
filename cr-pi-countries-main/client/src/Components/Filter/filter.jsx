@@ -1,9 +1,17 @@
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
-import { filterByActivity, filterContinent } from "../../redux/actions";
+import {
+  filterByActivity,
+  filterContinent,
+  setSort,
+  applySort,
+} from "../../redux/actions";
 
 export default function Filter() {
   const dispatch = useDispatch();
+  const [sortBy, setSortBy] = useState("name");
+  const [sortOrder, setSortOrder] = useState("asc");
 
   const handleContinentChange = (event) => {
     const continent = event.target.value;
@@ -14,6 +22,21 @@ export default function Filter() {
   const handleActivityChange = (event) => {
     const activity = event.target.value;
     dispatch(filterByActivity(activity));
+  };
+
+  const handleSortByChange = (event) => {
+    const newSortBy = event.target.value;
+    setSortBy(newSortBy);
+  };
+
+  const handleSortOrderChange = () => {
+    const newSortOrder = sortOrder === "asc" ? "desc" : "asc";
+    setSortOrder(newSortOrder);
+  };
+
+  const handleApplySort = () => {
+    dispatch(setSort(sortBy, sortOrder));
+    dispatch(applySort());
   };
 
   return (
@@ -39,6 +62,23 @@ export default function Filter() {
           <option value="Skiing">Skiing</option>
           <option value="Cultural visits">Cultural visits</option>
         </select>
+
+        <label htmlFor="sortBy">Sort by: </label>
+        <select id="sortBy" onChange={handleSortByChange} value={sortBy}>
+          <option value="name">Name</option>
+          <option value="population">Population</option>
+        </select>
+
+        <label htmlFor="sortOrder">Sort order: </label>
+        <select
+          id="sortOrder"
+          onChange={handleSortOrderChange}
+          value={sortOrder}
+        >
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+        <button onClick={handleApplySort}>Apply sort</button>
       </div>
     </>
   );

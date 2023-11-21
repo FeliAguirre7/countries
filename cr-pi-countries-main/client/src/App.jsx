@@ -4,6 +4,7 @@ import { Home, Form, Landing, Detail } from "./views";
 
 function App() {
   const location = useLocation();
+
   return (
     <div>
       {location.pathname !== "/" && <NavBar />}

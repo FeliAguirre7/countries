@@ -50,6 +50,7 @@ const CardsContainer = () => {
                 name={country.name}
                 continent={country.continent}
                 Activities={country.Activities}
+                population={country.population}
               ></Card>
             );
           })}
