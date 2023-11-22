@@ -1,5 +1,6 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import style from "../Filter/filter.module.css";
 
 import {
   filterByActivity,
@@ -10,6 +11,8 @@ import {
 
 export default function Filter() {
   const dispatch = useDispatch();
+  const appliedFilters = useSelector((state) => state.appliedFilters);
+
   const [sortBy, setSortBy] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
 
@@ -41,9 +44,13 @@ export default function Filter() {
 
   return (
     <>
-      <div>
+      <div className={style.filter}>
         <label htmlFor="continentFilter">Filter by continent: </label>
-        <select id="continentFilter" onChange={handleContinentChange}>
+        <select
+          id="continentFilter"
+          value={appliedFilters.continent}
+          onChange={handleContinentChange}
+        >
           <option value="All">All</option>
           <option value="Africa">Africa</option>
           <option value="Americas">Americas</option>
@@ -54,7 +61,11 @@ export default function Filter() {
         </select>
 
         <label htmlFor="activityFilter">Filter by activity: </label>
-        <select id="activityFilter" onChange={handleActivityChange}>
+        <select
+          id="activityFilter"
+          value={appliedFilters.activity}
+          onChange={handleActivityChange}
+        >
           <option value="All">All</option>
           <option value="Diving">Diving</option>
           <option value="Senderism">Senderism</option>

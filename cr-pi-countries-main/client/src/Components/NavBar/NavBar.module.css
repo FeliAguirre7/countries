@@ -1,6 +1,67 @@
 .mainNav {
+  background-color: rgba(99, 76, 230, 0.795);
   display: flex;
   justify-content: space-evenly;
   border-radius: 15px;
   border: 1px solid black;
+}
+
+.homeButton a {
+  text-decoration: none;
+}
+
+.homeButton {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #3498db;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #3498db;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.homeButton:hover {
+  background-color: #3498db;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.createButton a {
+  text-decoration: none;
+}
+
+.createButton {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #3498db;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #3498db;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.createButton:hover {
+  background-color: #3498db;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.quitButton a {
+  text-decoration: none;
+}
+
+.quitButton {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #3498db;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #3498db;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.quitButton:hover {
+  background-color: #3498db;
+  color: #fff;
+  transform: scale(1.1);
 }

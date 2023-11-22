@@ -10,7 +10,7 @@ import {
   CREATE_ACT,
   SET_SORT,
   APPLY_SORT,
-  RESTORE_STATE,
+  RESET_HOME_STATE,
 } from "./actionTypes";
 
 const initialState = {
@@ -28,14 +28,45 @@ const initialState = {
   noMatchesActivity: false,
   sortBy: "name",
   sortOrder: "asc",
+  originalCountries: [],
+};
+
+const applyFilters = (countries, appliedFilters) => {
+  let filteredCountries = countries.filter((country) => {
+    if (
+      appliedFilters.continent !== "All" &&
+      country.continent !== appliedFilters.continent
+    ) {
+      return false;
+    }
+
+    if (
+      appliedFilters.activity !== "All" &&
+      !country.Activities.some(
+        (activity) => activity.name === appliedFilters.activity
+      )
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
+  return filteredCountries;
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_COUNTRIES:
+      const filteredCountries = applyFilters(
+        action.payload,
+        state.appliedFilters,
+        state.sortBy,
+        state.sortOrder
+      );
       return {
         ...state,
-        countries: action.payload,
+        countries: filteredCountries,
         filterContinent: action.payload,
         filterActivity: action.payload,
         originalCountries: action.payload,
@@ -136,10 +167,9 @@ const rootReducer = (state = initialState, action) => {
         countries: sortedCountries,
       };
 
-    case RESTORE_STATE:
+    case RESET_HOME_STATE:
       return {
-        ...state,
-        ...action.payload,
+        ...initialState,
       };
 
     case RESET_FILTERS:

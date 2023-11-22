@@ -11,7 +11,7 @@ import {
   CREATE_ACT,
   SET_SORT,
   APPLY_SORT,
-  RESTORE_STATE,
+  RESET_HOME_STATE,
 } from "./actionTypes";
 
 export const getCountries = () => {
@@ -22,9 +22,8 @@ export const getCountries = () => {
   };
 };
 
-export const restoreState = (storedState) => ({
-  type: RESTORE_STATE,
-  payload: storedState,
+export const resetHomeState = () => ({
+  type: RESET_HOME_STATE,
 });
 
 export const searchByName = (name) => {

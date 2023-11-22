@@ -2,6 +2,11 @@
   border: 1px solid black;
   width: fit-content;
   height: fit-content;
+  box-sizing: border-box;
+  align-items: center;
+  text-align: center;
+  background-color: #d45206cb;
+  color: lightblue;
 }
 
 .flag {
