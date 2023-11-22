@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "../Filter/filter.module.css";
 
 import {
@@ -13,32 +13,42 @@ export default function Filter() {
   const dispatch = useDispatch();
   const appliedFilters = useSelector((state) => state.appliedFilters);
 
-  const [sortBy, setSortBy] = useState("name");
-  const [sortOrder, setSortOrder] = useState("asc");
+  const sortBy = useSelector((state) => state.sortBy);
+  const sortOrder = useSelector((state) => state.sortOrder);
+
+  const [localSortBy, setLocalSortBy] = useState("name");
+  const [localSortOrder, setLocalSortOrder] = useState("asc");
+
+  useEffect(() => {
+    setLocalSortBy(sortBy);
+    setLocalSortOrder(sortOrder);
+  }, [sortBy, sortOrder]);
 
   const handleContinentChange = (event) => {
     const continent = event.target.value;
     dispatch(filterContinent(continent));
+    handleApplySort();
     console.log(filterContinent(continent));
   };
 
   const handleActivityChange = (event) => {
     const activity = event.target.value;
     dispatch(filterByActivity(activity));
+    handleApplySort();
   };
 
   const handleSortByChange = (event) => {
     const newSortBy = event.target.value;
-    setSortBy(newSortBy);
+    setLocalSortBy(newSortBy);
   };
 
   const handleSortOrderChange = () => {
-    const newSortOrder = sortOrder === "asc" ? "desc" : "asc";
-    setSortOrder(newSortOrder);
+    const newSortOrder = localSortOrder === "asc" ? "desc" : "asc";
+    setLocalSortOrder(newSortOrder);
   };
 
   const handleApplySort = () => {
-    dispatch(setSort(sortBy, sortOrder));
+    dispatch(setSort(localSortBy, localSortOrder));
     dispatch(applySort());
   };
 
@@ -75,7 +85,7 @@ export default function Filter() {
         </select>
 
         <label htmlFor="sortBy">Sort by: </label>
-        <select id="sortBy" onChange={handleSortByChange} value={sortBy}>
+        <select id="sortBy" onChange={handleSortByChange} value={localSortBy}>
           <option value="name">Name</option>
           <option value="population">Population</option>
         </select>
@@ -84,7 +94,7 @@ export default function Filter() {
         <select
           id="sortOrder"
           onChange={handleSortOrderChange}
-          value={sortOrder}
+          value={localSortOrder}
         >
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>

@@ -31,7 +31,7 @@ const initialState = {
   originalCountries: [],
 };
 
-const applyFilters = (countries, appliedFilters) => {
+const applyFilters = (countries, appliedFilters, sortBy, sortOrder) => {
   let filteredCountries = countries.filter((country) => {
     if (
       appliedFilters.continent !== "All" &&
@@ -52,7 +52,17 @@ const applyFilters = (countries, appliedFilters) => {
     return true;
   });
 
-  return filteredCountries;
+  const sortedCountries = filteredCountries.slice().sort((a, b) => {
+    const keyA = a[sortBy];
+    const keyB = b[sortBy];
+
+    if (keyA < keyB) return sortOrder === "asc" ? -1 : 1;
+    if (keyA > keyB) return sortOrder === "asc" ? 1 : -1;
+
+    return 0;
+  });
+
+  return sortedCountries;
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -170,6 +180,8 @@ const rootReducer = (state = initialState, action) => {
     case RESET_HOME_STATE:
       return {
         ...initialState,
+        sortBy: "name",
+        sortOrder: "asc",
       };
 
     case RESET_FILTERS:
