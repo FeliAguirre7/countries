@@ -22,7 +22,7 @@ const Card = (props) => {
   }
 
   return (
-    <Link to={`/detail/${props.id}`}>
+    <Link to={`/detail/${props.id}`} className={style.Link}>
       <div className={style.mainCard}>
         <img
           className={style.flag}

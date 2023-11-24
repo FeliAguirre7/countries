@@ -5,7 +5,7 @@ const getAllCountries = async () => {
   const allCountries = await Country.findAll({
     include: {
       model: Activity,
-      attributes: ["name", "difficulty", "season"],
+      attributes: ["name", "difficulty", "season", "duration"],
     },
   });
   return allCountries;
@@ -30,7 +30,7 @@ const getCountryById = async (id) => {
   const countryId = await Country.findByPk(id, {
     include: {
       model: Activity,
-      attributes: ["name", "difficulty", "season"],
+      attributes: ["name", "difficulty", "season", "duration"],
     },
   });
 

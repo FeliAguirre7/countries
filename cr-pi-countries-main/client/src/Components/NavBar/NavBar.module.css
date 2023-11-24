@@ -2,8 +2,20 @@
   background-color: rgba(99, 76, 230, 0.795);
   display: flex;
   justify-content: space-evenly;
-  border-radius: 15px;
+  height: 100%;
+  align-items: center;
   border: 1px solid black;
+}
+
+.title {
+  color: rgb(88, 199, 88);
+  font-style: italic;
+}
+
+.worldImage {
+  display: flex;
+  height: 50px;
+  width: 50px;
 }
 
 .homeButton a {
@@ -13,15 +25,15 @@
 .homeButton {
   display: inline-block;
   padding: 10px 20px;
-  border: 2px solid #3498db;
+  border: 2px solid rgb(49, 245, 82);
   border-radius: 10px;
   text-decoration: none;
-  color: #3498db;
+  color: #dddddd;
   transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
 
 .homeButton:hover {
-  background-color: #3498db;
+  background-color: #34db66;
   color: #fff;
   transform: scale(1.1);
 }
@@ -33,10 +45,10 @@
 .createButton {
   display: inline-block;
   padding: 10px 20px;
-  border: 2px solid #3498db;
+  border: 2px solid rgb(49, 245, 82);
   border-radius: 10px;
   text-decoration: none;
-  color: #3498db;
+  color: #dddddd;
   transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
 
@@ -53,15 +65,15 @@
 .quitButton {
   display: inline-block;
   padding: 10px 20px;
-  border: 2px solid #3498db;
+  border: 2px solid rgb(49, 245, 82);
   border-radius: 10px;
   text-decoration: none;
-  color: #3498db;
+  color: #dddddd;
   transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
 
 .quitButton:hover {
-  background-color: #3498db;
+  background-color: #34db66;
   color: #fff;
   transform: scale(1.1);
 }

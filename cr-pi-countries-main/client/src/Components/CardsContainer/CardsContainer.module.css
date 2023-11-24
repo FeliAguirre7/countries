@@ -8,3 +8,11 @@
   gap: 3em;
   justify-content: space-around;
 }
+
+.noMatches {
+  display: flex;
+  color: rgb(255, 255, 255);
+  justify-content: space-around;
+  margin-top: 200px;
+  font-size: xx-large;
+}

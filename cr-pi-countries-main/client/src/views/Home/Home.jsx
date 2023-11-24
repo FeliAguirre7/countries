@@ -1,5 +1,4 @@
 import CardsContainer from "../../Components/CardsContainer/CardsContainer";
-import SearchBar from "../../Components/SearchBar/searchBar";
 import "./Home.css";
 
 import { useEffect } from "react";
@@ -18,10 +17,6 @@ const Home = () => {
   return (
     <>
       <div className="Home">
-        <h1>Countries</h1>
-        <h1>
-          <SearchBar />
-        </h1>
         <CardsContainer countries={countries} />
       </div>
     </>

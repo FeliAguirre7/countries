@@ -1,0 +1,33 @@
+.infoContainer {
+  height: 83.9vh;
+  background-color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #d45206cb;
+  border: 5px solid green;
+  color: lightblue;
+  max-width: 600px;
+  height: 500px;
+  padding: 20px;
+  margin-right: 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.h1 {
+  display: flex;
+  margin: 10px 0;
+
+  justify-content: space-around;
+}
+
+.flag {
+  width: 68%;
+  max-height: 77%;
+}

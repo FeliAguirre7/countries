@@ -1,3 +1,8 @@
 .filter {
+  display: flex;
+  color: lightblue;
   background-color: rgba(207, 67, 16, 0.89);
+  font-size: larger;
+  justify-content: space-evenly;
+  align-items: center;
 }

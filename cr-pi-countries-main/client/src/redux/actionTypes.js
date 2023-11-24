@@ -10,3 +10,5 @@ export const CREATE_ACT = "CREATE_ACT";
 export const SET_SORT = "SET_SORT";
 export const APPLY_SORT = "APPLY_SORT";
 export const RESET_HOME_STATE = "RESET_HOME_STATE";
+export const SET_PAGE_NUMBER = "SET_PAGE_NUMBER";
+export const RESET_COUNTRIES = "RESET_COUNTRIES";

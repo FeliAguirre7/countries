@@ -14,7 +14,11 @@ getAllCountriesHandler = async (req, res) => {
     const results = name
       ? await searchCountryByName(name)
       : await getAllCountries();
-    res.status(200).json(results);
+    if (results.length === 0) {
+      res.status(ERROR).json({ message: "No country found" });
+    } else {
+      res.status(200).json(results);
+    }
   } catch (error) {
     res.status(ERROR).json({ error: error.message });
   }
@@ -24,7 +28,11 @@ getCountryHandler = async (req, res) => {
   const { id } = req.params;
   try {
     const country = await getCountryById(id);
-    res.status(OK).json(country);
+    if (!country) {
+      res.status(ERROR).json({ message: "Country not found" });
+    } else {
+      res.status(OK).json(country);
+    }
   } catch (error) {
     res.status(ERROR).json({ error: error.message });
   }

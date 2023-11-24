@@ -1,4 +1,5 @@
 import React from "react";
+import "./Paginated.css";
 import { prev, next } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 
@@ -22,7 +23,7 @@ export default function Paginated({ pageNumber, pagesTotal }) {
         )}
 
         <span>{pageNumber}</span>
-        {pageNumber > pagesTotal ? (
+        {pageNumber >= pagesTotal ? (
           <>
             <button onClick={() => dispatch(next())} disabled>
               {"Next >"}

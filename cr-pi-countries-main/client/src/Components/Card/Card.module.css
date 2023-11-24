@@ -1,17 +1,30 @@
 .mainCard {
   border: 1px solid black;
-  width: fit-content;
-  height: fit-content;
+  width: 350px;
+  height: 580px;
   box-sizing: border-box;
   align-items: center;
   text-align: center;
   background-color: #d45206cb;
+  border-color: green;
+  border-width: 7px;
   color: lightblue;
+  font-size: larger;
+  overflow: hidden;
+}
+
+.mainCard:hover {
+  transform: scale(1.03);
 }
 
 .flag {
+  padding: 20px;
   min-height: 100px;
-  max-height: 400px;
+  max-height: 200px;
   min-width: 300px;
   max-width: 50px;
+}
+
+.Link {
+  text-decoration: none;
 }

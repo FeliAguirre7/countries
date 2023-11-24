@@ -1,0 +1,73 @@
+.title {
+  display: flex;
+  color: rgb(247, 108, 57);
+  justify-content: space-around;
+  font-style: italic;
+}
+
+.img {
+  width: 40%;
+  height: 38rem;
+  object-fit: cover;
+  padding: 1%;
+}
+
+.formContainer {
+  min-height: 84.5vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 40%;
+  min-height: 33rem;
+  background-color: var(--Oscuro);
+  padding: 2rem 4rem;
+  color: var(--white);
+  justify-content: space-evenly;
+  background-color: rgba(32, 94, 148, 0.658);
+  border: 7px solid rgb(247, 108, 57);
+}
+
+.formLabel {
+  color: lightblue;
+  display: flex;
+  font-size: large;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.formInput {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.formSelect {
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.countryList {
+  color: lightblue;
+}
+
+.countryList ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hs {
+  color: lightblue;
+}

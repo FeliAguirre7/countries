@@ -11,7 +11,7 @@ import {
 
 export default function Filter() {
   const dispatch = useDispatch();
-  const appliedFilters = useSelector((state) => state.appliedFilters);
+  const appliedFilters = useSelector((state) => state.appliedFilters); //mantener el estado del select de los filtros
 
   const sortBy = useSelector((state) => state.sortBy);
   const sortOrder = useSelector((state) => state.sortOrder);
@@ -20,6 +20,7 @@ export default function Filter() {
   const [localSortOrder, setLocalSortOrder] = useState("asc");
 
   useEffect(() => {
+    //mantener el estado del select de los ordenamientos
     setLocalSortBy(sortBy);
     setLocalSortOrder(sortOrder);
   }, [sortBy, sortOrder]);

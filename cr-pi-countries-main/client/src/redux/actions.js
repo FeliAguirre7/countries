@@ -12,6 +12,8 @@ import {
   SET_SORT,
   APPLY_SORT,
   RESET_HOME_STATE,
+  SET_PAGE_NUMBER,
+  RESET_COUNTRIES,
 } from "./actionTypes";
 
 export const getCountries = () => {
@@ -88,6 +90,17 @@ export const prev = () => {
     type: PREV,
   };
 };
+
+export const setPageNumber = (pageNumber) => {
+  return {
+    type: SET_PAGE_NUMBER,
+    payload: pageNumber,
+  };
+};
+
+export const resetCountries = () => ({
+  type: RESET_COUNTRIES,
+});
 
 export const createAct = (activity) => {
   return async function (dispatch) {

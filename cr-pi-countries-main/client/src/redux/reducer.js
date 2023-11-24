@@ -11,6 +11,8 @@ import {
   SET_SORT,
   APPLY_SORT,
   RESET_HOME_STATE,
+  SET_PAGE_NUMBER,
+  RESET_COUNTRIES,
 } from "./actionTypes";
 
 const initialState = {
@@ -29,6 +31,7 @@ const initialState = {
   sortBy: "name",
   sortOrder: "asc",
   originalCountries: [],
+  searchPerformed: false,
 };
 
 const applyFilters = (countries, appliedFilters, sortBy, sortOrder) => {
@@ -82,7 +85,7 @@ const rootReducer = (state = initialState, action) => {
         originalCountries: action.payload,
       };
     case SEARCH_BY_NAME:
-      return { ...state, countries: action.payload };
+      return { ...state, countries: action.payload, searchPerformed: true };
     case GET_BY_ID:
       return { ...state, detailById: action.payload };
     case FILTER_CONTINENT:
@@ -96,6 +99,7 @@ const rootReducer = (state = initialState, action) => {
           (country) => country.continent === action.payload
         );
       }
+
       if (state.appliedFilters.activity === "All") {
         finalFilterContinent = filteredByContinent;
       } else {
@@ -125,6 +129,25 @@ const rootReducer = (state = initialState, action) => {
 
       if (action.payload === "All") {
         filterByAct = [...state.filterActivity];
+        finalFilterAct = filterByAct;
+
+        if (state.appliedFilters.continent !== "All") {
+          finalFilterAct = finalFilterAct.filter(
+            (country) => country.continent === state.appliedFilters.continent
+          );
+        }
+
+        return {
+          ...state,
+          countries: finalFilterAct,
+          appliedFilters: {
+            ...state.appliedFilters,
+            activity: "All",
+          },
+          pageNumber: 1,
+          noMatchesActivity: false,
+          noMatchesContinent: false,
+        };
       } else {
         filterByAct = state.filterActivity.filter((country) =>
           country.Activities.some(
@@ -180,8 +203,22 @@ const rootReducer = (state = initialState, action) => {
     case RESET_HOME_STATE:
       return {
         ...initialState,
-        sortBy: "name",
-        sortOrder: "asc",
+      };
+
+    case RESET_COUNTRIES:
+      const resetCountries = applyFilters(
+        state.originalCountries,
+        state.appliedFilters,
+        state.sortBy,
+        state.sortOrder
+      );
+      return {
+        ...state,
+        countries: resetCountries,
+        noMatchesContinent: false,
+        noMatchesActivity: false,
+        pageNumber: 1,
+        searchPerformed: false,
       };
 
     case RESET_FILTERS:
@@ -206,6 +243,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         activities: [...state.activities, action.payload],
+      };
+    case SET_PAGE_NUMBER:
+      return {
+        ...state,
+        pageNumber: action.payload,
       };
     default:
       return { ...state };
