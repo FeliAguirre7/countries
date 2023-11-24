@@ -11,7 +11,7 @@ const Card = (props) => {
           <p>Activities:</p>
           <ul>
             {props.Activities.map((activity) => (
-              <li key={activity.id}>{activity.name}</li>
+              <li key={activity.name}>{activity.name}</li>
             ))}
           </ul>
         </div>

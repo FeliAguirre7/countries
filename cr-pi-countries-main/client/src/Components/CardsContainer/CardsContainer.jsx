@@ -47,7 +47,7 @@ const CardsContainer = () => {
         ) : (
           countriesOnPage.map((country) => (
             <Card
-              key={country.id}
+              key={country.name}
               id={country.id}
               flag={country.image}
               name={country.name}
