@@ -31,12 +31,21 @@ export const resetHomeState = () => ({
 
 export const searchByName = (name) => {
   return async (dispatch) => {
-    const response = await axios.get(
-      `http://localhost:3001/countries?name=${name.trim()}`
-    );
-    const results = response.data;
-    dispatch({ type: SEARCH_BY_NAME, payload: results });
-    dispatch({ type: SEARCH_PERFORMED, payload: true });
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/countries?name=${name.trim()}`
+      );
+      const results = response.data;
+      dispatch({ type: SEARCH_BY_NAME, payload: results });
+      dispatch({ type: SEARCH_PERFORMED, payload: true });
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        dispatch({ type: SEARCH_BY_NAME, payload: [] });
+        dispatch({ type: SEARCH_PERFORMED, payload: true });
+      } else {
+        console.error("Error en la búsqueda por nombre:", error);
+      }
+    }
   };
 };
 

@@ -86,6 +86,7 @@ const rootReducer = (state = initialState, action) => {
         originalCountries: action.payload,
       };
     case SEARCH_BY_NAME:
+      console.log("Search results:", action.payload);
       return { ...state, countries: action.payload, searchPerformed: true };
     case GET_BY_ID:
       return { ...state, detailById: action.payload };

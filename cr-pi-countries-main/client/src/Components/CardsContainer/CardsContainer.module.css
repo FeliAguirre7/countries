@@ -9,7 +9,7 @@
   justify-content: space-around;
 }
 
-.noMatches {
+.noCountryFound {
   display: flex;
   color: rgb(255, 255, 255);
   justify-content: space-around;

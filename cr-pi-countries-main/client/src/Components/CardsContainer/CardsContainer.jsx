@@ -43,7 +43,7 @@ const CardsContainer = () => {
       <Filter />
       <div className={style.cardCont}>
         {searchPerformed && countriesOnPage.length === 0 ? (
-          <div>No country found.</div>
+          <div className={style.noCountryFound}>No country found.</div>
         ) : (
           countriesOnPage.map((country) => (
             <Card

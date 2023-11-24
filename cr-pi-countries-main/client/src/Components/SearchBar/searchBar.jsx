@@ -13,6 +13,7 @@ const SearchBar = () => {
   };
 
   const handleSearch = () => {
+    console.log("Search initiated:", name);
     dispatch(searchByName(name));
     dispatch(setPageNumber(1));
     setName("");
