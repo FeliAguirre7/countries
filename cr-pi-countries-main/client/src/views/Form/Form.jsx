@@ -51,12 +51,7 @@ const Form = () => {
     } else {
       setForm((prevForm) => ({
         ...prevForm,
-        [name]:
-          name === "duration"
-            ? value !== ""
-              ? parseInt(value, 10)
-              : 0
-            : value,
+        [name]: value,
       }));
     }
   };
