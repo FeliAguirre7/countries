@@ -252,9 +252,13 @@ const Form = () => {
             <span style={{ color: "red" }}>{errors.countryId}</span>
           </div>
 
-          <button type="submit" disabled={submitDisable}>
-            Create
-          </button>
+          {Object.values(form).every((value) => value !== "") &&
+            form.countryId.length > 0 && <button type="submit">Create</button>}
+          {submitDisable && (
+            <span style={{ color: "lightgreen" }}>
+              Please fill in all fields
+            </span>
+          )}
         </form>
       </div>
     </>

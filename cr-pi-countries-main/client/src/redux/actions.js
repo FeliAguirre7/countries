@@ -14,6 +14,7 @@ import {
   RESET_HOME_STATE,
   SET_PAGE_NUMBER,
   RESET_COUNTRIES,
+  SEARCH_PERFORMED,
 } from "./actionTypes";
 
 export const getCountries = () => {
@@ -35,6 +36,7 @@ export const searchByName = (name) => {
     );
     const results = response.data;
     dispatch({ type: SEARCH_BY_NAME, payload: results });
+    dispatch({ type: SEARCH_PERFORMED, payload: true });
   };
 };
 

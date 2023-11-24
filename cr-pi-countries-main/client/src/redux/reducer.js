@@ -77,6 +77,7 @@ const rootReducer = (state = initialState, action) => {
         state.sortBy,
         state.sortOrder
       );
+
       return {
         ...state,
         countries: filteredCountries,

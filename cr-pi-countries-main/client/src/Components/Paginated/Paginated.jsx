@@ -9,13 +9,7 @@ export default function Paginated({ pageNumber, pagesTotal }) {
   return (
     <div>
       <div className="paginated_container">
-        {pageNumber <= 1 ? (
-          <>
-            <button onClick={() => dispatch(prev())} disabled>
-              {"< Prev"}
-            </button>
-          </>
-        ) : (
+        {pageNumber > 1 && (
           <>
             <button onClick={() => dispatch(prev())}>{"< Prev"}</button>
             <p>{pageNumber - 1}</p>
@@ -23,13 +17,7 @@ export default function Paginated({ pageNumber, pagesTotal }) {
         )}
 
         <span>{pageNumber}</span>
-        {pageNumber >= pagesTotal ? (
-          <>
-            <button onClick={() => dispatch(next())} disabled>
-              {"Next >"}
-            </button>
-          </>
-        ) : (
+        {pageNumber < pagesTotal && (
           <>
             <p>{pageNumber + 1}</p>
             <button onClick={() => dispatch(next())}>{"Next >"}</button>
