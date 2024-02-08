@@ -32,8 +32,6 @@ const CardsContainer = () => {
 
   const countriesOnPage = filteredCountries?.slice(from, until);
 
-  console.log(countriesOnPage);
-
   const handleResetCountries = () => {
     dispatch(resetCountries());
   };

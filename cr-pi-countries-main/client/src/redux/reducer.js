@@ -126,59 +126,33 @@ const rootReducer = (state = initialState, action) => {
         noMatchesContinent,
       };
     case FILTER_ACTIVITY:
-      let filterByAct;
-      let finalFilterAct;
+      const filteredActivity =
+        action.payload === "All"
+          ? state.filterActivity
+          : state.filterActivity.filter((country) =>
+              country.Activities.some(
+                (activity) => activity.name === action.payload
+              )
+            );
 
-      if (action.payload === "All") {
-        filterByAct = [...state.filterActivity];
-        finalFilterAct = filterByAct;
-
-        if (state.appliedFilters.continent !== "All") {
-          finalFilterAct = finalFilterAct.filter(
-            (country) => country.continent === state.appliedFilters.continent
-          );
-        }
-
-        return {
-          ...state,
-          countries: finalFilterAct,
-          appliedFilters: {
-            ...state.appliedFilters,
-            activity: "All",
-          },
-          pageNumber: 1,
-          noMatchesActivity: false,
-          noMatchesContinent: false,
-        };
-      } else {
-        filterByAct = state.filterActivity.filter((country) =>
-          country.Activities.some(
-            (activity) => activity.name === action.payload
-          )
-        );
-      }
-
-      if (state.appliedFilters.continent === "All") {
-        finalFilterAct = filterByAct;
-      } else {
-        finalFilterAct = filterByAct.filter(
-          (country) => country.continent === state.appliedFilters.continent
-        );
-      }
-
-      const noMatchesActivity = finalFilterAct.length === 0;
+      const filteredActivityByContinent =
+        state.appliedFilters.continent === "All"
+          ? filteredActivity
+          : filteredActivity.filter(
+              (country) => country.continent === state.appliedFilters.continent
+            );
 
       return {
         ...state,
-        countries: finalFilterAct,
+        countries: filteredActivityByContinent,
         appliedFilters: {
           ...state.appliedFilters,
           activity: action.payload,
         },
         pageNumber: 1,
-        noMatchesActivity,
+        noMatchesActivity: filteredActivityByContinent.length === 0,
+        noMatchesContinent: false,
       };
-
     case SET_SORT:
       return {
         ...state,

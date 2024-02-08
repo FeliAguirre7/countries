@@ -10,7 +10,7 @@ const Form = () => {
   const [form, setForm] = useState({
     name: "",
     difficulty: "",
-    duration: 0,
+    duration: "",
     season: "",
     countryId: [],
   });
@@ -20,7 +20,7 @@ const Form = () => {
   const [errors, setErrors] = useState({
     name: "",
     difficulty: "",
-    duration: 0,
+    duration: "",
     season: "",
     countryId: [],
   });
@@ -56,16 +56,22 @@ const Form = () => {
     }
   };
 
+  //setea el form sin el pais removido
+
   const handleRemoveCountry = (removedCountry) => {
     setForm((prevForm) => ({
       ...prevForm,
       countryId: prevForm.countryId.filter((id) => id !== removedCountry),
     }));
 
+    //setea los paises seleccionados sin el pais removido
+
     setSelectedCountries(
       (prevSelected) =>
         new Set([...prevSelected].filter((id) => id !== removedCountry))
     );
+
+    //limpia los errores del pais que he eliminado
 
     setErrors((prevErrors) => {
       const newCountryIdErrors = Array.isArray(prevErrors.countryId)
@@ -82,7 +88,7 @@ const Form = () => {
     setForm({
       name: "",
       difficulty: "",
-      duration: 0,
+      duration: "",
       season: "",
       countryId: [],
     });
@@ -125,12 +131,15 @@ const Form = () => {
     const finalData = {
       ...form,
     };
-    console.log(finalData);
     dispatch(createAct(finalData));
     alert("activity created");
 
     resetForm();
   };
+
+  const sortedCountries = [...originalCountries].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 
   return (
     <>
@@ -143,6 +152,14 @@ const Form = () => {
         <form onSubmit={handleSubmit} className="mainForm">
           <h1 className="title">Create a tourist activity!</h1>
           <div>
+            <label>Activity: </label>
+            {/* <input
+              type="text"
+              onChange={handleChange}
+              value={form.name}
+              name="name"
+            ></input> */}
+
             <label htmlFor="name" className="formLabel">
               Activity:{" "}
             </label>
@@ -219,7 +236,7 @@ const Form = () => {
               onChange={handleChange}
               multiple
             >
-              {originalCountries.map((country) => {
+              {sortedCountries.map((country) => {
                 return (
                   <option key={country.id} value={country.id}>
                     {country.name}
@@ -231,9 +248,8 @@ const Form = () => {
               {form.countryId.map((countryId) => (
                 <li key={countryId} className="countryList">
                   {
-                    originalCountries.find(
-                      (country) => country.id === countryId
-                    ).name
+                    sortedCountries.find((country) => country.id === countryId)
+                      .name
                   }
                   <button
                     type="button"

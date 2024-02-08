@@ -29,7 +29,6 @@ export default function Filter() {
     const continent = event.target.value;
     dispatch(filterContinent(continent));
     handleApplySort();
-    console.log(filterContinent(continent));
   };
 
   const handleActivityChange = (event) => {
